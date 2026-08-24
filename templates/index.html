@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ai-doctor_}mihir_ahana</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    let symptoms = [];
+    function getSymptomsData(data) {
+      symptoms = data;
+    }
+    getSymptomsData({{data | tojson }});
+  </script>
+</head>
+<body>
+  <div class="app-container">
+    <div class="chat-glass">
+      <header class="chat-header">
+        <div class="header-info">
+          <div class="avatar-container">
+            <div class="avatar-pulse"></div>
+            <div class="avatar-icon"><i class="fas fa-heartbeat"></i></div>
+          </div>
+          <div class="header-text">
+            <h1 class="heading-title">ai-doctor_}mihir_ahana</h1>
+            <span class="status"><span class="status-dot"></span> Online</span>
+          </div>
+        </div>
+        <div class="header-actions">
+           <i class="fa fa-ellipsis-v action-icon"></i>
+        </div>
+      </header>
+      
+      <main class="chat-messages" id="conversation">
+        <div class="row message-body">
+          <div class="col-sm-12 message-main-receiver">
+            <div class="receiver">
+              <div class="message-text">
+                Welcome! I'm <strong>ai-doctor_}mihir_ahana</strong>.
+                What symptoms are you currently experiencing? When you've entered all of your symptoms, please write '<b>Done</b>'.
+                Make sure you enter as much symptoms as possible so the prediction can be as correct as possible.
+                <br><br>
+                <span class="lab-upload-hint">📎 <strong>NEW:</strong> You can also upload a photo of your lab report (blood test) and I'll read the numbers for you!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Hidden file input for lab report upload -->
+      <input type="file" id="lab-file-input" accept="image/*" style="display: none;" />
+
+      <footer class="chat-input-area">
+        <div id="start-over" class="action-btn" title="Restart">
+          <i class="fas fa-redo"></i>
+        </div>
+
+        <div id="upload-lab" class="action-btn lab-upload-btn" title="Upload Lab Report">
+          <i class="fas fa-vial"></i>
+        </div>
+        
+        <div class="input-wrapper autocomplete">
+          <div class="symptoms-list-container">
+            <ul id="symptoms-list"></ul>
+          </div>
+          <input id="message-text" type="text" placeholder="Type your symptoms here..." autocomplete="off" />
+        </div>
+
+        <div id="send" class="action-btn primary-btn" title="Send">
+          <i class="fas fa-paper-plane"></i>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

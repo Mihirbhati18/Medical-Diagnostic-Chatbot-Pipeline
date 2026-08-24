@@ -1,0 +1,593 @@
+/* Premium Glassmorphism Dark Theme */
+:root {
+  --bg-color: #0b0c10;
+  --glass-bg: rgba(20, 22, 30, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #e0e6ed;
+  --text-secondary: #9aa5b1;
+  --accent-cyan: #00f2fe;
+  --accent-purple: #4facfe;
+  --receiver-bg: rgba(79, 172, 254, 0.15);
+  --receiver-border: rgba(79, 172, 254, 0.3);
+  --sender-bg: rgba(255, 255, 255, 0.1);
+  --sender-border: rgba(255, 255, 255, 0.15);
+  --font-family: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  background-image: url('../img/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Glassmorphism Chat Window */
+.chat-glass {
+  width: 100%;
+  max-width: 800px;
+  height: 90%;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Header */
+.chat-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-container {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+}
+
+.avatar-icon {
+  font-size: 24px;
+  color: white;
+  z-index: 2;
+}
+
+.avatar-pulse {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff88;
+}
+
+.action-icon {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.action-icon:hover {
+  color: #fff;
+}
+
+/* Chat Messages Area */
+.chat-messages {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for clean look but allow scrolling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+/* Generic Row/Col Resets from old Bootstrap injected by JS */
+.row {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+.col-sm-12 {
+  width: 100%;
+  padding: 0;
+}
+
+.message-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.message-main-receiver {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.message-main-sender {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.receiver, .sender {
+  max-width: 75%;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.receiver {
+  background: var(--receiver-bg);
+  border: 1px solid var(--receiver-border);
+  border-radius: 20px 20px 20px 4px;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.sender {
+  background: var(--sender-bg);
+  border: 1px solid var(--sender-border);
+  border-radius: 20px 20px 4px 20px;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Input Area */
+.chat-input-area {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.action-btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.05);
+}
+
+.action-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+#message-text {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 1.05rem;
+  font-family: var(--font-family);
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#message-text:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+#message-text::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+/* Autocomplete Symptoms List */
+.symptoms-list-container {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: rgba(20, 22, 30, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  z-index: 10;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+.symptoms-list-container::-webkit-scrollbar {
+  width: 4px;
+}
+.symptoms-list-container::-webkit-scrollbar-thumb {
+  background: var(--accent-purple);
+  border-radius: 10px;
+}
+
+#symptoms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#symptoms-list li {
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+
+#symptoms-list li:last-child {
+  border-bottom: none;
+}
+
+#symptoms-list li:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--accent-cyan);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0;
+  }
+  .chat-glass {
+    border-radius: 0;
+    height: 100%;
+    border: none;
+  }
+}
+
+/* ─── Lab Report Upload Button ───────────────────────────────── */
+.lab-upload-btn {
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+  transition: all 0.3s ease;
+}
+
+.lab-upload-btn:hover {
+  background: linear-gradient(135deg, #5a4bd1, #8b7cf6);
+  box-shadow: 0 6px 25px rgba(108, 92, 231, 0.5);
+  color: #fff;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ─── Lab Upload Hint (in welcome message) ───────────────────── */
+.lab-upload-hint {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 14px;
+  background: rgba(108, 92, 231, 0.15);
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #a29bfe;
+  animation: hintGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes hintGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(108, 92, 231, 0); }
+  50% { box-shadow: 0 0 12px rgba(108, 92, 231, 0.3); }
+}
+
+/* ─── Scanning Animation ─────────────────────────────────────── */
+.scan-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.scan-icon {
+  font-size: 2rem;
+  color: var(--accent-cyan);
+  animation: scanPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes scanPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.scan-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.dot-anim {
+  animation: dotBlink 1.4s steps(4, end) infinite;
+}
+
+@keyframes dotBlink {
+  0%   { content: ''; opacity: 0; }
+  25%  { opacity: 0.3; }
+  50%  { opacity: 0.6; }
+  75%  { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+.scan-bar {
+  width: 180px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scan-bar-fill {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 4px;
+  animation: scanSlide 1.5s ease-in-out infinite;
+}
+
+@keyframes scanSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* ─── Lab Results Card ───────────────────────────────────────── */
+.lab-results-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(108, 92, 231, 0.25);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  animation: cardFadeIn 0.5s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lab-results-header {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(79, 172, 254, 0.2));
+  border-bottom: 1px solid rgba(108, 92, 231, 0.2);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #a29bfe;
+  letter-spacing: 0.5px;
+}
+
+.lab-results-header i {
+  margin-right: 8px;
+}
+
+/* ─── Lab Results Table ──────────────────────────────────────── */
+.lab-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.lab-results-table thead th {
+  padding: 10px 14px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.lab-results-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #d0d6e0;
+}
+
+.lab-results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.lab-results-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Status badges */
+.status-normal {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.status-high {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.status-low {
+  color: #74b9ff;
+  font-weight: 600;
+}
+
+/* ─── Derived Symptoms Section ───────────────────────────────── */
+.lab-derived-symptoms {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.derived-header {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #a29bfe;
+  margin-bottom: 10px;
+}
+
+.derived-header i {
+  margin-right: 6px;
+}
+
+.derived-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.symptom-tag {
+  padding: 5px 14px;
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.symptom-tag:hover {
+  background: rgba(0, 242, 254, 0.2);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+/* ─── Lab Results Footer ─────────────────────────────────────── */
+.lab-results-footer {
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Responsive: make lab table scrollable on small screens */
+@media (max-width: 600px) {
+  .lab-results-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

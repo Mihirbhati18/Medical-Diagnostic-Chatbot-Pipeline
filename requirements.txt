@@ -1,0 +1,9 @@
+flask
+torch
+nltk
+pandas
+numpy<2.0.0
+opencv-python==4.8.1.78
+pytesseract
+Pillow
+scikit-learn==1.2.2
