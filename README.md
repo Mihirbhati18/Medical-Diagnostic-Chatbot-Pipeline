@@ -1,6 +1,6 @@
 # Medical Chatbot
 
-An advanced, AI-powered medical chatbot designed to predict potential diseases based on user symptoms and analyze uploaded lab reports using Computer Vision and NLP.
+A medical chatbot designed to predict potential diseases based on user symptoms and analyze uploaded lab reports using Computer Vision and NLP.
 
 ## Table of Contents
 - [Features](#features)
@@ -24,8 +24,8 @@ An advanced, AI-powered medical chatbot designed to predict potential diseases b
 
 1. **Clone the repository** (or download the folder):
    ```bash
-   git clone <your-repository-url>
-   cd MedicalChatbot
+   git clone https://github.com/Mihirbhati18/Medical-Diagnostic-Chatbot-Pipeline
+   cd Medical-Diagnostic-Chatbot-Pipeline
    ```
 
 2. **Create a Virtual Environment**:
@@ -58,7 +58,7 @@ An advanced, AI-powered medical chatbot designed to predict potential diseases b
 ## Running the Project
 
 1. Open your terminal or command prompt.
-2. Navigate to the project directory (`MedicalChatbot`).
+2. Navigate to the project directory.
 3. Ensure your virtual environment is activated (`.\venv\Scripts\activate`).
 4. Run the Flask application:
    ```bash
@@ -72,3 +72,9 @@ An advanced, AI-powered medical chatbot designed to predict potential diseases b
 1. **Chatting**: Type your symptoms naturally (e.g., "I have a headache and a severe fever"). The bot will register these symptoms.
 2. **Predicting**: Once you have entered all your symptoms, type **"done"**. The bot will analyze your symptoms, predict the disease, provide a description, and list precautions.
 3. **Lab Reports**: Click the attachment/upload icon to upload an image of a lab report. The bot will scan it, extract numerical values, check them against normal medical reference ranges, and add any abnormal findings (like "Low Hemoglobin" translating to "fatigue") directly into your symptom list!
+
+## Disclaimer
+This is a student project for learning. It is not a medical device and must not be used for real diagnosis.
+
+## Team
+Built by **Mihir Bhati** ([@Mihirbhati18](https://github.com/Mihirbhati18)) and **Ahana Sharan**.
